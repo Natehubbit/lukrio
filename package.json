@@ -1,24 +1,49 @@
 {
   "dependencies": {
+    "@react-native-community/checkbox": "^0.5.7",
+    "@react-native-community/slider": "^3.0.3",
+    "@reduxjs/toolkit": "^1.5.1",
+    "@types/lodash": "^4.14.168",
+    "@typescript-eslint/eslint-plugin": "^4.22.1",
+    "@typescript-eslint/parser": "^4.22.1",
+    "eslint": "^7.12.1",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.23.2",
     "expo": "~40.0.0",
+    "expo-image-picker": "~9.2.0",
     "framer-motion": "^3.3.0",
+    "lodash": "^4.17.21",
     "moti": "^0.4.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-hook-form": "^7.3.5",
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
     "react-native-reanimated": "2.0.0-rc.0",
-    "react-native-web": "~0.13.12"
+    "react-native-responsive-screen": "^1.4.2",
+    "react-native-snap-carousel": "^3.9.1",
+    "react-native-web": "~0.13.12",
+    "react-redux": "^7.2.4",
+    "redux-logger": "^3.0.6"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
-    "@expo/webpack-config": "^0.12.58"
+    "@expo/webpack-config": "^0.12.58",
+    "@types/react": "~16.9.35",
+    "@types/react-native": "~0.63.2",
+    "@types/react-native-snap-carousel": "^3.8.2",
+    "@types/redux-logger": "^3.0.8"
   },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "lint": "npx eslint . --ext tsx,ts",
+    "lint:fix": "npx eslint . --ext tsx,ts"
   },
   "private": true
 }
