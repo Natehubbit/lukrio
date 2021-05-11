@@ -8,18 +8,28 @@ var Navbar_1 = require("../../components/Navbar");
 var SlideShow_1 = require("../../components/SlideShow");
 var react_native_responsive_screen_1 = require("react-native-responsive-screen");
 var theme_1 = require("../../common/theme");
-var react_hook_form_1 = require("react-hook-form");
+var useSlides_1 = require("../../hooks/useSlides");
 var Home = function () {
-    var control = react_hook_form_1.useForm().control;
+    var slideRef = react_1.useRef();
+    var slides = useSlides_1.useSlides();
+    var onNext = function () {
+        slideRef.current.snapToNext();
+    };
+    var onBack = function () {
+        slideRef.current.snapToPrev();
+    };
+    var onSave = function () {
+        console.log(slides);
+    };
     return (react_1["default"].createElement(react_1["default"].Fragment, null,
-        react_1["default"].createElement(Navbar_1["default"], { title: 'Templates' }),
-        react_1["default"].createElement(react_native_1.ScrollView, { keyboardShouldPersistTaps: 'handled', contentContainerStyle: styles.container },
+        react_1["default"].createElement(Navbar_1["default"], { onNext: onNext, onBack: onBack }),
+        react_1["default"].createElement(react_native_1.ScrollView, { keyboardShouldPersistTaps: "handled", contentContainerStyle: styles.container },
             react_1["default"].createElement(react_native_1.View, { style: [styles.contentContainer] },
                 react_1["default"].createElement(react_native_1.View, { style: [styles.content] },
-                    react_1["default"].createElement(SlideShow_1["default"], null),
-                    react_1["default"].createElement(CaptionInput_1["default"], { field: 'caption', control: control })),
+                    react_1["default"].createElement(SlideShow_1["default"], { innerRef: slideRef }),
+                    react_1["default"].createElement(CaptionInput_1["default"], null)),
                 react_1["default"].createElement(Editor_1["default"], null))),
-        react_1["default"].createElement(react_native_1.TouchableOpacity, { style: [styles.save] },
+        react_1["default"].createElement(react_native_1.TouchableOpacity, { onPress: onSave, style: [styles.save] },
             react_1["default"].createElement(react_native_1.Text, { style: styles.saveText }, "Save"))));
 };
 exports["default"] = Home;

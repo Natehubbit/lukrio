@@ -43,7 +43,8 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "lint": "npx eslint . --ext tsx,ts",
-    "lint:fix": "npx eslint . --ext tsx,ts"
+    "lint:fix": "npx eslint . --ext tsx,ts --fix",
+    "prettier": "npx prettier . --write --ext tsx, ts"
   },
   "private": true
 }

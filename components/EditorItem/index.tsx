@@ -1,16 +1,20 @@
-import React, { FC, useEffect, useState } from "react"
-import { Text, TouchableNativeFeedback, View } from "react-native"
-import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS } from "../../common/theme";
-import UtilService from "../../services/UtilService";
-import EditorItemStyle from './style';
-import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
-import { EDIT_TOOLS } from '../../common/constants';
-import { ScrollView } from "moti";
+import React, { FC, useEffect, useState } from 'react'
+import {
+  Text,
+  TouchableNativeFeedback,
+  View
+} from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient'
+import { COLORS } from '../../common/theme'
+import UtilService from '../../services/UtilService'
+import EditorItemStyle from './EditorItemStyle'
+import { MaterialCommunityIcons as Icon } from '@expo/vector-icons'
+import { EDIT_TOOLS } from '../../common/constants'
+import { ScrollView } from 'moti'
 
 interface EditorItemProps {
-  label: keyof typeof EDIT_TOOLS,
-  expanded?: boolean
+  label: keyof typeof EDIT_TOOLS;
+  expanded?: boolean;
 }
 
 const EditorItem: FC<EditorItemProps> = ({
@@ -21,11 +25,10 @@ const EditorItem: FC<EditorItemProps> = ({
   const [expand, setExpand] = useState(expanded || false)
   const icon = expand ? 'chevron-down' : 'chevron-right'
   useEffect(() => {
-    console.log('expanded', expanded)
     setExpand(expanded)
   }, [expanded])
   const onExpand = () => {
-    setExpand(e => !e)
+    setExpand((e) => !e)
   }
   return (
     <View>
@@ -54,9 +57,13 @@ const EditorItem: FC<EditorItemProps> = ({
           </View>
         </View>
       </TouchableNativeFeedback>
-      {expand && <ScrollView contentContainerStyle={[EditorItemStyle.itemBody]}>
-        {children}
-      </ScrollView>}
+      {expand && (
+        <ScrollView
+          contentContainerStyle={[EditorItemStyle.itemBody]}
+        >
+          {children}
+        </ScrollView>
+      )}
     </View>
   )
 }

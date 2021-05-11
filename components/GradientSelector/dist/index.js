@@ -24,10 +24,9 @@ var GradientSelector = function () {
     var hasGradient = gradients && gradients.length > 2;
     react_1.useEffect(function () {
         if (background) {
-            console.log('Back', background);
             var gradient = (background || {
                 colors: {
-                    gradient: ['transparent', 'transparent']
+                    gradient: ["transparent", "transparent"]
                 }
             }).colors.gradient;
             setGradients(gradient);
@@ -36,15 +35,15 @@ var GradientSelector = function () {
             setGradients([]);
     }, [background]);
     var onSelect = function (c, index) {
-        var grad = gradients && gradients.map(function (g, i) {
-            if (i === index) {
-                return c;
-            }
-            return g;
-        });
+        var grad = gradients &&
+            gradients.map(function (g, i) {
+                if (i === index) {
+                    return c;
+                }
+                return g;
+            });
         setGradients(grad);
-        dispatch(slideSlice_1.slideActions
-            .setBackground({
+        dispatch(slideSlice_1.slideActions.setBackground({
             slideId: slideId,
             background: {
                 colors: {
@@ -55,15 +54,14 @@ var GradientSelector = function () {
     };
     var onAddGradient = function () {
         var hasGradient = !!gradients;
-        dispatch(slideSlice_1.slideActions
-            .setBackground({
+        dispatch(slideSlice_1.slideActions.setBackground({
             slideId: slideId,
             background: {
                 image: undefined,
                 mono: undefined,
                 colors: {
                     gradient: hasGradient
-                        ? __spreadArrays(gradients, ['transparent']) : ['transparent', 'transparent']
+                        ? __spreadArrays(gradients, ["transparent"]) : ["transparent", "transparent"]
                 }
             }
         }));
@@ -73,8 +71,7 @@ var GradientSelector = function () {
             return grads.filter(function (_, i) { return id !== i; });
         });
         var newGradients = gradients.filter(function (_, i) { return id !== i; });
-        dispatch(slideSlice_1.slideActions
-            .setBackground({
+        dispatch(slideSlice_1.slideActions.setBackground({
             slideId: slideId,
             background: {
                 image: undefined,
@@ -88,16 +85,16 @@ var GradientSelector = function () {
     return (react_1["default"].createElement(react_native_1.View, { style: [GradientSelectorStyle_1["default"].container] },
         gradients &&
             gradients.map(function (col, i) {
-                return react_1["default"].createElement(react_native_1.View, { key: i, style: [GradientSelectorStyle_1["default"].row] },
+                return (react_1["default"].createElement(react_native_1.View, { key: i, style: [GradientSelectorStyle_1["default"].row] },
                     react_1["default"].createElement(react_native_1.View, { style: [GradientSelectorStyle_1["default"].head] },
                         react_1["default"].createElement(react_native_1.Text, { style: [GradientSelectorStyle_1["default"].label] },
                             "Gradient ",
                             i + 1),
-                        hasGradient && react_1["default"].createElement(react_native_1.TouchableOpacity, { onPress: function () { return onRemoveGradient(i); } },
-                            react_1["default"].createElement(Icon_1["default"], { name: 'close-circle', color: theme_1.COLORS.primary.val, size: 25 }))),
+                        hasGradient && (react_1["default"].createElement(react_native_1.TouchableOpacity, { onPress: function () { return onRemoveGradient(i); } },
+                            react_1["default"].createElement(Icon_1["default"], { name: "close-circle", color: theme_1.COLORS.primary.val, size: 25 })))),
                     react_1["default"].createElement(react_native_1.View, { style: [GradientSelectorStyle_1["default"].colors] }, constants_1.COLORS.map(function (c) {
-                        return react_1["default"].createElement(Color_1["default"], { active: c === col, key: c, color: c, onPress: function () { return onSelect(c, i); } });
-                    })));
+                        return (react_1["default"].createElement(Color_1["default"], { active: c === col, key: c, color: c, onPress: function () { return onSelect(c, i); } }));
+                    }))));
             }),
         react_1["default"].createElement(react_native_1.TouchableOpacity, { onPress: onAddGradient, style: [GradientSelectorStyle_1["default"].add] },
             react_1["default"].createElement(react_native_1.Text, { style: [GradientSelectorStyle_1["default"].addText] }, "+Add Gradient"))));

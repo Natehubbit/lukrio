@@ -1,14 +1,14 @@
 import {
   createAction,
   createSlice,
-  PayloadAction,
-} from "@reduxjs/toolkit";
-import { SlideState, TextValue } from "../../types";
-import _ from "lodash";
-import { TextStyle } from "react-native";
-import { COLORS } from "../../common/theme";
-import UtilService from "../../services/UtilService";
-import { SlideData } from "../../types/index";
+  PayloadAction
+} from '@reduxjs/toolkit'
+import { SlideState, TextValue } from '../../types'
+import _ from 'lodash'
+import { TextStyle } from 'react-native'
+import { COLORS } from '../../common/theme'
+import UtilService from '../../services/UtilService'
+import { SlideData } from '../../types/index'
 
 interface PayloadData {
   slideId: number;
@@ -22,8 +22,9 @@ const initialState: SlideState = {
   current: [
     {
       id: 0,
-      title: "Fundamental Analysis",
-      header: { text: "", style: undefined, type: "text" },
+      title: 'Fundamental Analysis',
+      caption: '',
+      header: { text: '', style: undefined, type: 'text' },
       subTexts: [],
       background: {
         image: undefined,
@@ -34,15 +35,16 @@ const initialState: SlideState = {
             UtilService.alterColor(
               COLORS.color1.val,
               COLORS.color1.step
-            ),
-          ],
-        },
-      },
+            )
+          ]
+        }
+      }
     },
     {
       id: 1,
-      title: "Technical Analysis",
-      header: { text: "", style: undefined, type: "text" },
+      title: 'Technical Analysis',
+      caption: '',
+      header: { text: '', style: undefined, type: 'text' },
       subTexts: [],
       background: {
         image: undefined,
@@ -53,74 +55,43 @@ const initialState: SlideState = {
             UtilService.alterColor(
               COLORS.color1.val,
               COLORS.color1.step
-            ),
-          ],
-        },
-      },
-    },
-  ],
-};
+            )
+          ]
+        }
+      }
+    }
+  ]
+}
 
 export const { actions, ...slideSlice } = createSlice({
-  name: "slides",
+  name: 'slides',
   initialState,
   reducers: {
-    setHeader(
+    setHeader (
       state,
       { payload }: PayloadAction<TextValue>
     ) {
-      const { id, text } = payload;
+      const { id, text } = payload
       const update = state.current.map((d) => {
         if (d.id === id) {
-          return { ...d, header: { text } };
+          return { ...d, header: { text } }
         }
-        return d;
-      });
+        return d
+      })
       const future =
-        state.future.length > 0 ? [] : state.future;
+        state.future.length > 0 ? [] : state.future
       return {
         ...state,
         current: update,
         future,
-        past: [...state.past, state.current],
-      };
+        past: [...state.past, state.current]
+      }
     },
-    addSubText(
+    addSubText (
       state,
       { payload }: PayloadAction<TextValue>
     ) {
-      const { id, text } = payload;
-      const update = state.current.map((d) => {
-        if (d.id === id) {
-          return {
-            ...d,
-            subTexts: [
-              ...d.subTexts,
-              {
-                text,
-                bullet: false,
-                style: undefined,
-                type: "text",
-              },
-            ],
-          };
-        }
-        return d;
-      });
-      const future =
-        state.future.length > 0 ? [] : state.future;
-      return {
-        ...state,
-        current: update,
-        past: [...state.past, state.current],
-        future,
-      };
-    },
-    addSubImage(
-      state,
-      { payload }: PayloadAction<TextValue>
-    ) {
-      const { id, text } = payload;
+      const { id, text } = payload
       const update = state.current.map((d) => {
         if (d.id === id) {
           return {
@@ -131,188 +102,245 @@ export const { actions, ...slideSlice } = createSlice({
                 text,
                 bullet: false,
                 style: undefined,
-                type: "image",
-              },
-            ],
-          };
+                type: 'text'
+              }
+            ]
+          }
         }
-        return d;
-      });
+        return d
+      })
       const future =
-        state.future.length > 0 ? [] : state.future;
+        state.future.length > 0 ? [] : state.future
       return {
         ...state,
         current: update,
         past: [...state.past, state.current],
-        future,
-      };
+        future
+      }
     },
-    removeSubtext(
+    addSubImage (
+      state,
+      { payload }: PayloadAction<TextValue>
+    ) {
+      const { id, text } = payload
+      const update = state.current.map((d) => {
+        if (d.id === id) {
+          return {
+            ...d,
+            subTexts: [
+              ...d.subTexts,
+              {
+                text,
+                bullet: false,
+                style: undefined,
+                type: 'image'
+              }
+            ]
+          }
+        }
+        return d
+      })
+      const future =
+        state.future.length > 0 ? [] : state.future
+      return {
+        ...state,
+        current: update,
+        past: [...state.past, state.current],
+        future
+      }
+    },
+    removeSubtext (
       state,
       {
-        payload,
+        payload
       }: PayloadAction<{ slideId: number; idx: number }>
     ) {
-      const { slideId, idx } = payload;
+      const { slideId, idx } = payload
       const update = state.current.map((d) => {
         if (d.id === slideId) {
           const newSubTxts = d.subTexts.filter(
             (_, i) => i !== idx
-          );
-          return { ...d, subTexts: newSubTxts };
+          )
+          return { ...d, subTexts: newSubTxts }
         }
-        return d;
-      });
+        return d
+      })
       const future =
-        state.future.length > 0 ? [] : state.future;
+        state.future.length > 0 ? [] : state.future
       return {
         ...state,
         current: update,
         past: [...state.past, state.current],
-        future,
-      };
+        future
+      }
     },
-    updateSubtext(
+    setCaption (
+      state,
+      {
+        payload
+      }: PayloadAction<{ id: number; text: string }>
+    ) {
+      const { current } = state
+      const { id, text } = payload
+      const update = current.map((sld) => {
+        if (sld.id === id) {
+          return {
+            ...sld,
+            caption: text
+          }
+        }
+        return sld
+      })
+      const future =
+        state.future.length > 0 ? [] : state.future
+      return {
+        ...state,
+        current: update,
+        past: [...state.past, state.current],
+        future
+      }
+    },
+    updateSubtext (
       state,
       { payload }: PayloadAction<PayloadData>
     ) {
-      const { slideId, textId, text } = payload;
+      const { slideId, textId, text } = payload
       const update = state.current.map((d) => {
         if (d.id === slideId) {
           const newSubs = d.subTexts.map((txt, i) => {
             if (textId === i) {
-              return { ...txt, bullet: false, text };
+              return { ...txt, bullet: false, text }
             }
-            return txt;
-          });
-          return { ...d, subTexts: newSubs };
+            return txt
+          })
+          return { ...d, subTexts: newSubs }
         }
-        return d;
-      });
+        return d
+      })
       const future =
-        state.future.length > 0 ? [] : state.future;
+        state.future.length > 0 ? [] : state.future
 
       return {
         ...state,
         current: update,
         past: [...state.past, state.current],
-        future,
-      };
+        future
+      }
     },
-    undo(state) {
-      const { past, current } = state;
-      if (past.length === 0) return state;
-      const prev = past[past.length - 1];
-      const newPast = past.slice(0, past.length - 1);
+    undo (state) {
+      const { past, current } = state
+      if (past.length === 0) return state
+      const prev = past[past.length - 1]
+      const newPast = past.slice(0, past.length - 1)
       return {
         ...state,
         current: prev,
         past: newPast,
-        future: [current, ...state.future],
-      };
+        future: [current, ...state.future]
+      }
     },
-    redo(state) {
-      const { future, past, current } = state;
-      if (future.length === 0) return state;
-      const next = future[0];
-      const newFuture = future.slice(1);
+    redo (state) {
+      const { future, past, current } = state
+      if (future.length === 0) return state
+      const next = future[0]
+      const newFuture = future.slice(1)
       return {
         ...state,
         past: [...past, current],
         current: next,
-        future: newFuture,
-      };
+        future: newFuture
+      }
     },
-    setSubtextStyle(
+    setSubtextStyle (
       state,
       { payload }: PayloadAction<TextStylePayload>
     ) {
-      const { slideId, idx, style } = payload;
+      const { slideId, idx, style } = payload
       const update = state.current.map((s) => {
         if (s.id === slideId) {
           const newSubTexts = s.subTexts.map((sub, i) => {
             if (i === idx) {
-              const hasStyle = !!sub.style;
+              const hasStyle = !!sub.style
               return hasStyle
                 ? {
                     ...sub,
-                    style: { ...sub.style, ...style },
+                    style: { ...sub.style, ...style }
                   }
                 : {
                     ...sub,
-                    style,
-                  };
+                    style
+                  }
             }
-            return sub;
-          });
-          return { ...s, subTexts: newSubTexts };
+            return sub
+          })
+          return { ...s, subTexts: newSubTexts }
         }
-        return s;
-      });
+        return s
+      })
       const future =
-        state.future.length > 0 ? [] : state.future;
+        state.future.length > 0 ? [] : state.future
       return {
         ...state,
         current: update,
         past: [...state.past, state.current],
-        future,
-      };
+        future
+      }
     },
-    setSubTextBullet(
+    setSubTextBullet (
       state,
       { payload }: PayloadAction<BulletPayload>
     ) {
-      const { slideId, idx, bullet } = payload;
+      const { slideId, idx, bullet } = payload
       const update = state.current.map((s) => {
         if (s.id === slideId) {
           const newSubTexts = s.subTexts.map((sub, i) => {
             if (i === idx) {
-              return { ...sub, bullet };
+              return { ...sub, bullet }
             }
-            return sub;
-          });
-          return { ...s, subTexts: newSubTexts };
+            return sub
+          })
+          return { ...s, subTexts: newSubTexts }
         }
-        return s;
-      });
+        return s
+      })
       const future =
-        state.future.length > 0 ? [] : state.future;
+        state.future.length > 0 ? [] : state.future
       return {
         ...state,
         current: update,
         past: [...state.past, state.current],
-        future,
-      };
+        future
+      }
     },
-    setBackground(
+    setBackground (
       state,
       { payload }: PayloadAction<SlideStylePayload>
     ) {
-      const { background: back, slideId } = payload;
+      const { background: back, slideId } = payload
       const update = state.current.map((s) => {
         if (s.id === slideId) {
           return {
             ...s,
-            background: { ...s.background, ...back },
-          };
+            background: { ...s.background, ...back }
+          }
         }
-        return s;
-      });
+        return s
+      })
       const future =
-        state.future.length > 0 ? [] : state.future;
+        state.future.length > 0 ? [] : state.future
       return {
         ...state,
         current: update,
         past: [...state.past, state.current],
-        future,
-      };
-    },
-  },
-});
+        future
+      }
+    }
+  }
+})
 
 export const slideActions = {
-  ...actions,
-};
+  ...actions
+}
 
 interface TextStylePayload {
   slideId: number;
@@ -328,5 +356,5 @@ interface BulletPayload {
 
 interface SlideStylePayload {
   slideId: number;
-  background: Partial<SlideData["background"]>;
+  background: Partial<SlideData['background']>;
 }

@@ -1,35 +1,35 @@
-import { StyleSheet } from "react-native";
-import { heightPercentageToDP as hp } from "react-native-responsive-screen";
-import { COLORS } from "../../common/theme";
+import { StyleSheet } from 'react-native'
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import { COLORS } from '../../common/theme'
 
 const GradientSelectorStyle = StyleSheet.create({
   container: {
-    padding: hp("1%"),
+    padding: hp('1%')
   },
   colors: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+    flexDirection: 'row',
+    flexWrap: 'wrap'
   },
   add: {
-    marginTop: hp("1%"),
+    marginTop: hp('1%')
   },
   addText: {
     color: COLORS.primary.val,
-    fontWeight: "bold",
+    fontWeight: 'bold'
   },
   row: {
-    marginBottom: hp("2.2%"),
+    marginBottom: hp('2.2%')
   },
   label: {
     color: COLORS.primary.val,
-    fontWeight: "bold",
+    fontWeight: 'bold'
   },
   head: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 12,
-  },
-});
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 12
+  }
+})
 
-export default GradientSelectorStyle;
+export default GradientSelectorStyle

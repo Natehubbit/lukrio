@@ -21,18 +21,23 @@ var useEditor = function () {
     var _e = react_1.useState(), bullet = _e[0], setBullet = _e[1];
     var _f = react_1.useState(false), hasText = _f[0], setHasText = _f[1];
     var _g = react_1.useState(0), subTextNo = _g[0], setSubTextNo = _g[1];
-    var _h = react_1.useState(), background = _h[0], setBackground = _h[1];
+    var _h = react_1.useState(""), title = _h[0], setTitle = _h[1];
+    var _j = react_1.useState(), captionText = _j[0], setCaptionText = _j[1];
+    var _k = react_1.useState(), background = _k[0], setBackground = _k[1];
     var getData = function () {
         var _a;
-        var background = (slide || {
-            background: undefined
-        }).background;
+        var _b = slide || {
+            background: undefined,
+            caption: undefined
+        }, background = _b.background, title = _b.title, caption = _b.caption;
         setStyle(styleVal);
         setBullet(bulletVal);
         setHasText(!!text);
         setSubTextNo(((_a = slide === null || slide === void 0 ? void 0 : slide.subTexts) === null || _a === void 0 ? void 0 : _a.length) || 0);
         setBackground(background);
         setTextType(type);
+        setTitle(title);
+        setCaptionText(caption);
     };
     var setTextId = function (id) {
         dispatch(editorSlice_1.editorActions.setActiveText({ id: id }));
@@ -63,6 +68,8 @@ var useEditor = function () {
         subTextNo: subTextNo,
         background: background,
         textType: textType,
+        title: title,
+        captionText: captionText,
         setTextId: setTextId,
         setSlideId: setSlideId,
         clearTextId: clearTextId

@@ -1,12 +1,17 @@
 import React, { FC, useEffect, useState } from 'react'
-import { View, Text, TouchableNativeFeedback, Image } from 'react-native'
-import UtilService from '../../services/UtilService';
+import {
+  View,
+  Text,
+  TouchableNativeFeedback,
+  Image
+} from 'react-native'
+import UtilService from '../../services/UtilService'
 import Icon from '../Icon'
-import ImageSelectorStyle from './ImageSelectorStyle';
+import ImageSelectorStyle from './ImageSelectorStyle'
 
 interface ImageSelectorProps {
-  uri?: string
-  onSelect: (uri: string) => void
+  uri?: string;
+  onSelect: (uri: string) => void;
 }
 
 const ImageSelector: FC<ImageSelectorProps> = ({
@@ -32,11 +37,16 @@ const ImageSelector: FC<ImageSelectorProps> = ({
       <View style={[ImageSelectorStyle.container]}>
         <Text>Select Image</Text>
         {uri
-          ? <Image
-            resizeMode='cover'
+          ? (
+          <Image
+            resizeMode="cover"
             source={{ uri }}
-            style={[ImageSelectorStyle.selected]} />
-          : <Icon name='camera-image' />}
+            style={[ImageSelectorStyle.selected]}
+          />
+            )
+          : (
+          <Icon name="camera-image" />
+            )}
       </View>
     </TouchableNativeFeedback>
   )

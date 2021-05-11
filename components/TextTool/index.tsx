@@ -3,7 +3,6 @@ import { View, Text } from 'react-native'
 import { color } from 'react-native-reanimated'
 import ColorSelector from '../ColorSelector'
 
-
 const TextTool = () => {
   return (
     <View>

@@ -6,7 +6,7 @@ import { SlideData } from "../types/index";
 
 const useEditor = () => {
   const dispatch = useDispatch();
-  let subTextNoRef = useRef(0);
+  const subTextNoRef = useRef(0);
   const { slideId, textId } = useSelector((s) => s.editor);
 
   const slide = useSelector((s) =>
@@ -29,13 +29,15 @@ const useEditor = () => {
   const [bullet, setBullet] = useState<boolean>();
   const [hasText, setHasText] = useState(false);
   const [subTextNo, setSubTextNo] = useState(0);
-  const [background, setBackground] = useState<
-    SlideData["background"]
-  >();
+  const [title, setTitle] = useState("");
+  const [captionText, setCaptionText] = useState<string>();
+  const [background, setBackground] =
+    useState<SlideData["background"]>();
 
   const getData = () => {
-    const { background } = slide || {
+    const { background, title, caption } = slide || {
       background: undefined,
+      caption: undefined,
     };
     setStyle(styleVal);
     setBullet(bulletVal);
@@ -43,6 +45,8 @@ const useEditor = () => {
     setSubTextNo(slide?.subTexts?.length || 0);
     setBackground(background);
     setTextType(type);
+    setTitle(title);
+    setCaptionText(caption);
   };
 
   const setTextId = (id: number) => {
@@ -74,6 +78,8 @@ const useEditor = () => {
     subTextNo,
     background,
     textType,
+    title,
+    captionText,
     setTextId,
     setSlideId,
     clearTextId,

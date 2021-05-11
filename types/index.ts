@@ -1,7 +1,6 @@
 import {
   ColorValue,
   StyleProp,
-  StyleSheet,
   TextStyle,
 } from "react-native";
 
@@ -27,6 +26,7 @@ export interface SlideData {
   title: string;
   header: SubText;
   subTexts: SubText[];
+  caption: string;
   background?: {
     image: string;
     mono: ColorValue;

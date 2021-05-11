@@ -1,16 +1,21 @@
 import React, { FC } from 'react'
-import { View, Text, Image, TouchableOpacity } from 'react-native'
-import ImageComponentStyle from './ImageComponentStyle';
-import Icon from '../Icon/index';
-import { COLORS } from '../../common/theme';
-import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { useDispatch } from '../../redux/store';
-import { slideActions } from '../../redux/slices/slideSlice';
-import useEditor from '../../hooks/useEditor';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity
+} from 'react-native'
+import ImageComponentStyle from './ImageComponentStyle'
+import Icon from '../Icon/index'
+import { COLORS } from '../../common/theme'
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen'
+import { useDispatch } from '../../redux/store'
+import { slideActions } from '../../redux/slices/slideSlice'
+import useEditor from '../../hooks/useEditor'
 
 interface ImageComponentProps {
-  uri: string
-  id: number
+  uri: string;
+  id: number;
 }
 
 const ImageComponent: FC<ImageComponentProps> = ({
@@ -31,13 +36,18 @@ const ImageComponent: FC<ImageComponentProps> = ({
     <View style={[ImageComponentStyle.container]}>
       <View style={[ImageComponentStyle.actions]}>
         <TouchableOpacity onPress={onDelete}>
-          <Icon size={hp('3%')} color={COLORS.white.val} name='close-circle' />
+          <Icon
+            size={hp('3%')}
+            color={COLORS.white.val}
+            name="close-circle"
+          />
         </TouchableOpacity>
       </View>
       <Image
-        resizeMode='cover'
+        resizeMode="cover"
         style={[ImageComponentStyle.img]}
-        source={{ uri }} />
+        source={{ uri }}
+      />
     </View>
   )
 }

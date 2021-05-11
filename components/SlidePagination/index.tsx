@@ -3,8 +3,8 @@ import { View, Text } from 'react-native'
 import SlidePaginationStyle from './SlidePaginationStyle'
 
 interface SlidePaginationProps {
-  pages: number,
-  page: number
+  pages: number;
+  page: number;
 }
 
 const SlidePagination: FC<SlidePaginationProps> = ({
@@ -16,12 +16,15 @@ const SlidePagination: FC<SlidePaginationProps> = ({
     <View style={[SlidePaginationStyle.container]}>
       {dots.map((_, i) => {
         const isActive = i === page
-        return <View
-          key={i}
-          style={[
-            SlidePaginationStyle.dot,
-            isActive &&
-            SlidePaginationStyle.active]} />
+        return (
+          <View
+            key={i}
+            style={[
+              SlidePaginationStyle.dot,
+              isActive && SlidePaginationStyle.active
+            ]}
+          />
+        )
       })}
     </View>
   )

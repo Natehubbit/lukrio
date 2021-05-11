@@ -41,6 +41,7 @@ var initialState = {
         {
             id: 0,
             title: "Fundamental Analysis",
+            caption: "",
             header: { text: "", style: undefined, type: "text" },
             subTexts: [],
             background: {
@@ -57,6 +58,7 @@ var initialState = {
         {
             id: 1,
             title: "Technical Analysis",
+            caption: "",
             header: { text: "", style: undefined, type: "text" },
             subTexts: [],
             background: {
@@ -135,6 +137,19 @@ exports.actions = (_a = toolkit_1.createSlice({
                     return __assign(__assign({}, d), { subTexts: newSubTxts });
                 }
                 return d;
+            });
+            var future = state.future.length > 0 ? [] : state.future;
+            return __assign(__assign({}, state), { current: update, past: __spreadArrays(state.past, [state.current]), future: future });
+        },
+        setCaption: function (state, _a) {
+            var payload = _a.payload;
+            var current = state.current;
+            var id = payload.id, text = payload.text;
+            var update = current.map(function (sld) {
+                if (sld.id === id) {
+                    return __assign(__assign({}, sld), { caption: text });
+                }
+                return sld;
             });
             var future = state.future.length > 0 ? [] : state.future;
             return __assign(__assign({}, state), { current: update, past: __spreadArrays(state.past, [state.current]), future: future });
